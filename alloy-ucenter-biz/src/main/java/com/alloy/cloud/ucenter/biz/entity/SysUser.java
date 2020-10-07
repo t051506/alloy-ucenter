@@ -19,7 +19,9 @@ public class SysUser {
     private String phone;//简介
     private String headImg;//头像
     private Integer orgCode;//部门ID
+    private String createBy;
     private LocalDateTime createTime;
+    private String updateBy;
     private LocalDateTime updateTime;//修改时间
     private Integer isLock;//0-正常，9-锁定
     private Integer isDelete;//0-正常，1-删除
