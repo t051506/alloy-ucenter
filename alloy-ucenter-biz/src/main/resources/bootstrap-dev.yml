@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: alloy-ucenter
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.79.94.56:8848
+        group: ALLOY
+        namespace: 50e447c9-4212-43f1-92c2-a76edcb195d7
+      config:
+        group: ${spring.cloud.nacos.discovery.group}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-configs:
+          - ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      username: nacos
+      password: nacos
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://120.79.94.56:3306/alloy?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+
+  redis:
+    host: 120.79.94.56
+    port: 6379
+
+mybatis:
+  typeAliasesPackage: com.lorem.plat.**.entity
+  mapperLocations: classpath*:/mapper/*.xml
+
+security:
+  oauth2:
+    client:
+      client-id: alloy-ucenter
+      client-secret: alloy-ucenter #ENC(i3cDFhs26sa2Ucrfz2hnQw==)
+      scope: server
+    resource:
+      token-info-uri: http://alloy-security/oauth/check_token
+    ignore:
+      urls:
+        - /openapi/v1/**
+        - /provider/v1/**
+
+
+
+
+

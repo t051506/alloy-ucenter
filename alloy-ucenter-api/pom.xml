@@ -11,17 +11,5 @@
 
     <artifactId>alloy-ucenter-api</artifactId>
 
-<dependencies>
-    <!--core 工具类-->
-    <dependency>
-        <groupId>com.alloy.cloud</groupId>
-        <artifactId>alloy-common-core</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <!--feign 依赖-->
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-</dependencies>
+
 </project>

@@ -1,0 +1,9 @@
+server:
+  port: 9997
+
+spring:
+  profiles:
+    active: dev
+
+
+
