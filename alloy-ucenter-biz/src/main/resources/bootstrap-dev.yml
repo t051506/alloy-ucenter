@@ -42,8 +42,18 @@ security:
       token-info-uri: http://alloy-security/oauth/check_token
     ignore:
       urls:
+        - /actuator/**
         - /openapi/v1/**
         - /provider/v1/**
+      #swaggerProviders:
+        # swagger start
+        - /swagger-ui.html
+        - /swagger-resources/**
+        - /images/**
+        - /webjars/**
+        - /v2/**
+        - /configuration/**
+        # swagger end
 
 
 
