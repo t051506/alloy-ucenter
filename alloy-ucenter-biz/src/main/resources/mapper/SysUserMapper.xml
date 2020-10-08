@@ -4,11 +4,11 @@
 <mapper namespace="com.alloy.cloud.ucenter.biz.mapper.SysUserMapper">
 
     <sql id="BaseColumnSql">
-		user_id,username,password,salt,phone,head_img,org_code,update_time,is_lock,is_delete,create_by,create_time,update_by,update_time
+		user_id,username,password,salt,phone,head_img,org_code,is_lock,is_delete,create_by,create_time,update_by,update_time
 	</sql>
 
     <sql id="BaseValuesSql">
-		#{userId},#{username},#{password},#{salt},#{phone},#{headImg},#{orgCode},#{updateTime},#{isLock},#{isDelete},#{create_by},#{createTime},#{updateBy},#{updateTime}
+		#{userId},#{username},#{password},#{salt},#{phone},#{headImg},#{orgCode},#{isLock},#{isDelete},#{createBy},#{createTime},#{updateBy},#{updateTime}
 	</sql>
 
     <insert id="insert" parameterType="com.alloy.cloud.ucenter.biz.entity.SysUser">

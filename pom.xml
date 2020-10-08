@@ -80,6 +80,7 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.core.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
