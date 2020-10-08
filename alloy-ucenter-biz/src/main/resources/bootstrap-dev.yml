@@ -29,7 +29,7 @@ spring:
     port: 6379
 
 mybatis:
-  typeAliasesPackage: com.lorem.plat.**.entity
+  typeAliasesPackage: com.alloy.cloud.**.entity
   mapperLocations: classpath*:/mapper/*.xml
 
 security:
