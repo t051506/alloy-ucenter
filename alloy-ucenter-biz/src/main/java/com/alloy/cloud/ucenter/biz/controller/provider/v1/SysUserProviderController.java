@@ -1,5 +1,6 @@
 package com.alloy.cloud.ucenter.biz.controller.provider.v1;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.alloy.cloud.common.core.base.R;
 import com.alloy.cloud.ucenter.api.dto.RemoteUser;
 import com.alloy.cloud.ucenter.biz.entity.SysUser;
@@ -23,6 +24,9 @@ public class SysUserProviderController {
     public R<RemoteUser> loadByUserName(@RequestHeader("form") String from,@PathVariable("username") String username){
         RemoteUser remoteUser = new RemoteUser();
         SysUser sysUser = sysUserService.queryByUserName(username);
+        if(ObjectUtil.isNull(sysUser)){
+            return R.failed("用户不存在");
+        }
         BeanUtils.copyProperties(sysUser,remoteUser);
         return R.ok(remoteUser);
     }
