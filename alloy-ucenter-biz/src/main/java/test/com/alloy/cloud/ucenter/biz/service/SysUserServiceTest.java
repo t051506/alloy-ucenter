@@ -52,7 +52,7 @@ public void after() throws Exception {
 public void testInsert() throws Exception {
     SysUser sysUser = new SysUser();
     sysUser.setUsername("admin");
-    sysUser.setPassword("admin");
+    sysUser.setPassword("123456");
     sysUser.setUserId(Long.getLong(UUID.randomUUID().toString()));
     sysUser.setCreateTime(LocalDateTime.now());
     sysUser.setIsDelete(CommonConstants.STATUS_NORMAL);

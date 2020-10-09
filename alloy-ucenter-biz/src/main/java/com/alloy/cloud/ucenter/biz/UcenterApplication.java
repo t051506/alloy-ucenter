@@ -4,6 +4,7 @@ import com.alloy.cloud.common.security.annotation.EnableCloudFeignClients;
 import com.alloy.cloud.common.security.annotation.EnableCloudResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Author: tankechao
@@ -12,6 +13,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 @SpringCloudApplication
 @EnableCloudResourceServer
 @EnableCloudFeignClients
+@ComponentScan("com.alloy.cloud")
 public class UcenterApplication {
     public static void main(String[] args) {
         SpringApplication.run(UcenterApplication.class, args);

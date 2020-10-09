@@ -31,6 +31,7 @@ spring:
 mybatis:
   typeAliasesPackage: com.alloy.cloud.**.entity
   mapperLocations: classpath*:/mapper/*.xml
+  config-location: classpath:/mybatis-config-mysql.xml
 
 security:
   oauth2:
@@ -55,7 +56,23 @@ security:
         - /configuration/**
         # swagger end
 
-
+# swagger 配置
+swagger:
+  title: Cloud Swagger API
+  license: Powered By Alloy
+  licenseUrl: https://www.baidu.com
+  terms-of-service-url: https://www.baidu.com
+  contact:
+    email: tankechao@gmail.com
+    url: https://www.baidu.com
+  authorization:
+    name: cloud for auth
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: server all
+    token-url-list:
+      - http://${GATEWAY_HOST:alloy-gateway}:${GATEWAY-PORT:9999}/auth/oauth/token
 
 
 

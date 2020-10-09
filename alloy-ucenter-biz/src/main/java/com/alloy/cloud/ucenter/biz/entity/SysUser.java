@@ -18,7 +18,7 @@ public class SysUser {
     private String salt;//随机盐
     private String phone;//简介
     private String headImg;//头像
-    private Integer orgCode;//部门ID
+    private Integer orgCode;//组织编码
     private String createBy;
     private LocalDateTime createTime;
     private String updateBy;
