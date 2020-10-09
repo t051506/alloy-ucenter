@@ -24,6 +24,6 @@ public class SysUserDTO implements Serializable{
     private String headImg;//头像
     private Integer orgCode;//部门ID
     private LocalDateTime updateTime;//修改时间
-    private Object isLock;//0-正常，9-锁定
-    private Object isDelete;//0-正常，1-删除
+    private Integer isLock;//0-正常，9-锁定
+    private Integer isDelete;//0-正常，1-删除
 }
