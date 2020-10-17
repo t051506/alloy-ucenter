@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * 用户表
@@ -28,9 +27,11 @@ public class SysUserService{
 
     private final SysUserMapper sysUserMapper;
 
+    private final IdGenService idGenService;
+
     @Transactional(rollbackFor = Exception.class)
     public void insert(SysUser sysUser) {
-        sysUser.setUserId(Long.getLong(UUID.randomUUID().toString()));
+        sysUser.setUserId(idGenService.genId());
         sysUser.setCreateTime(LocalDateTime.now());
         sysUser.setIsDelete(CommonConstants.STATUS_NORMAL);
         sysUser.setPassword(ENCODER.encode(sysUser.getPassword()));

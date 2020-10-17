@@ -1,4 +1,4 @@
-package com.alloy.cloud.ucenter.biz.config;
+package com.alloy.cloud.ucenter.biz.constants;
 
 /**
  * @Author: tankechao
