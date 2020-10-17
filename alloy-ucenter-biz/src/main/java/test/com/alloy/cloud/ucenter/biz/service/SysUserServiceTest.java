@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -60,5 +61,10 @@ public void testInsert() throws Exception {
     sysUser.setCreateBy("");
     sysUserMapper.insert(sysUser);
 }
-
+@Test
+public void testpwd(){
+    log.info("Mim:{}",ENCODER.encode("123456"));
+    log.info(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123456"));
+    log.info("match:{}",ENCODER.matches("123456", "$2a$10$yaq6L7qL6vxu8/9WXWo.2O0ewS0ry4NFpdu14.uQeY2TNsnk.Oy82"));
+}
 }

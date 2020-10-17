@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户
@@ -35,5 +32,11 @@ public class SysUserController {
         BeanUtils.copyProperties(dto,sysUser);
         sysUserService.insert(sysUser);
         return R.ok();
+    }
+
+    @GetMapping("/{username}")
+    @ApiOperation("查询")
+    public R<SysUser> queryByUsername(@PathVariable("username") String username){
+        return R.ok(sysUserService.queryByUserName(username));
     }
 }
