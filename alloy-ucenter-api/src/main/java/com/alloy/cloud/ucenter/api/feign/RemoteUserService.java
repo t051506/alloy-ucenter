@@ -1,6 +1,7 @@
 package com.alloy.cloud.ucenter.api.feign;
 
 import com.alloy.cloud.common.core.base.R;
+import com.alloy.cloud.common.core.constant.SecurityConstants;
 import com.alloy.cloud.common.core.constant.ServiceNameConstants;
 import com.alloy.cloud.ucenter.api.dto.RemoteUser;
 import com.alloy.cloud.ucenter.api.feign.factory.RemoteUserServiceFallbackFactory;
@@ -18,5 +19,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface RemoteUserService {
 
     @GetMapping("/provider/v1/user/info/{username}")
-    R<RemoteUser> loadByUsername(@RequestHeader("from") String from, @PathVariable("username") String username);
+    R<RemoteUser> loadByUsername(@RequestHeader(SecurityConstants.FROM) String from, @PathVariable("username") String username);
 }

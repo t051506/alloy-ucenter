@@ -2,6 +2,7 @@ package com.alloy.cloud.ucenter.biz.controller.provider.v1;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.alloy.cloud.common.core.base.R;
+import com.alloy.cloud.common.core.constant.SecurityConstants;
 import com.alloy.cloud.ucenter.api.dto.RemoteUser;
 import com.alloy.cloud.ucenter.biz.entity.SysUser;
 import com.alloy.cloud.ucenter.biz.service.SysUserService;
@@ -21,7 +22,7 @@ public class SysUserProviderController {
     private final SysUserService sysUserService;
 
     @GetMapping("/info/{username}")
-    public R<RemoteUser> loadByUserName(@RequestHeader("from") String from,@PathVariable("username") String username){
+    public R<RemoteUser> loadByUserName(@RequestHeader(SecurityConstants.FROM) String from, @PathVariable("username") String username){
         RemoteUser remoteUser = new RemoteUser();
         SysUser sysUser = sysUserService.queryByUserName(username);
         if(ObjectUtil.isNull(sysUser)){
