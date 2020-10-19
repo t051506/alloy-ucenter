@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<!--配置logStash 服务地址-->
+		<destination>127.0.0.1:5602</destination>
+		<queueSize>1048576</queueSize>
+		<!-- 日志输出编码 -->
+		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<pattern>
+					<pattern>
+						{
+						"dateTime":"%date{\"yyyy-MM-dd HH:mm:ss,SSSZ\"}",
+						"level": "%level",
+						"service": "${springAppName:-}",
+						<!--"trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",-->
+						"class": "%logger{40}",
+						"rest": "%message",
+						"stack_trace":"%exception{40}"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+	<root level="ERROR">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="LOGSTASH" />
+	</root>
+</configuration>

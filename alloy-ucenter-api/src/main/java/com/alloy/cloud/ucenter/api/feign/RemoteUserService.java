@@ -18,5 +18,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface RemoteUserService {
 
     @GetMapping("/provider/v1/user/info/{username}")
-    R<RemoteUser> loadByUsername(@RequestHeader("form") String from, @PathVariable("username") String username);
+    R<RemoteUser> loadByUsername(@RequestHeader("from") String from, @PathVariable("username") String username);
 }
