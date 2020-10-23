@@ -1,0 +1,46 @@
+
+{
+  "settings": {
+    "analysis": {
+      "pinyin_filter": {
+        "type": "pinyin",
+        "keep_separate_first_letter": true,
+        "keep_first_letter": true,
+        "keep_full_pinyin": true,
+        "keep_none_chinese": true,
+        "keep_original": true,
+        "limit_first_letter_length": 16,
+        "lowercase": true,
+        "trim_whitespace": true,
+        "keep_none_chinese_in_first_letter": true
+      },
+      "my_analyzer": {
+        "type": "custom",
+        "filter": [
+          "pinyin_filter"
+        ]
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "title": {
+        "type": "text",
+        "fields": {
+          "a_pinyin": {
+            "type": "text",
+            "analyzer": "my_analyzer"
+          },
+          "b_analyzer": {
+            "type": "text",
+            "analyzer": "ik_smart"
+          }
+        }
+      },
+      "name": {
+        "type": "keyword"
+      }
+    }
+  }
+}
