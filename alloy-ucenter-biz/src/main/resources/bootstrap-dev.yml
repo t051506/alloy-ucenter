@@ -25,9 +25,19 @@ spring:
     url: jdbc:mysql://120.79.94.56:3306/alloy?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     hikari:
       max-lifetime: 180000
+
   redis:
     host: 120.79.94.56
     port: 6379
+
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 192.168.173.20:9200 #集群逗号隔开
+  elasticsearch:
+    rest:
+      uris: 192.168.173.20:9200 #集群逗号隔开
 
 mybatis:
   typeAliasesPackage: com.alloy.cloud.**.entity
