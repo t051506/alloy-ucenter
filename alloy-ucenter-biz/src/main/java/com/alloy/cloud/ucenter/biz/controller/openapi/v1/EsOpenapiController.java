@@ -4,9 +4,20 @@ import com.alloy.cloud.common.core.base.R;
 import com.alloy.cloud.ucenter.biz.entity.EsLibrary;
 import com.alloy.cloud.ucenter.biz.repository.EsLibraryRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -51,9 +62,28 @@ public class EsOpenapiController {
     }
 
     @PostMapping("/page")
-    public R<Page<EsLibrary>> findAll(String name) {
+    public R<Page<EsLibrary>> page(String name,Integer page,Integer size) {
         PageRequest pageRequest = PageRequest.of(0, 20);
-        Page<EsLibrary> result = esLibraryRepository.findAll(pageRequest);
+//        Page<EsLibrary> result = esLibraryRepository.findAll(pageRequest);
+        Pageable pageable = PageRequest.of(page, size);
+        //检索条件
+        BoolQueryBuilder bqb = QueryBuilders.boolQuery();
+        if(StringUtils.isNotEmpty(name))
+            bqb.must(QueryBuilders.matchPhraseQuery("name", name));
+        //排序条件
+        FieldSortBuilder fsb = SortBuilders.fieldSort("price").order(SortOrder.DESC);
+        //聚合条件
+        TermsAggregationBuilder builder1 = AggregationBuilders.terms("name").field("name.keyword");
+//        TermsAggregationBuilder builder2 = AggregationBuilders.terms("year").field("year.keyword");
+//        TermsAggregationBuilder builder = builder1.subAggregation(builder2);
+        //构建查询
+        NativeSearchQuery query = new NativeSearchQueryBuilder()
+                .withQuery(bqb)
+                .withSort(fsb)
+                .addAggregation(builder1)
+                .withPageable(pageable)
+                .build();
+        Page<EsLibrary> result = esLibraryRepository.search(query);
         return R.ok(result);
     }
 
