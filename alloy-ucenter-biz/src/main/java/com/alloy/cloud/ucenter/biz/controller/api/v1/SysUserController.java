@@ -39,4 +39,5 @@ public class SysUserController {
     public R<SysUser> queryByUsername(@PathVariable("username") String username){
         return R.ok(sysUserService.queryByUserName(username));
     }
+
 }

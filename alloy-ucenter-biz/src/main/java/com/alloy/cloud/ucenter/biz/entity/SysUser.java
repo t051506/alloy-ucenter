@@ -3,6 +3,7 @@ package com.alloy.cloud.ucenter.biz.entity;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+
 /**
  * 用户表
  * @author tankechao
