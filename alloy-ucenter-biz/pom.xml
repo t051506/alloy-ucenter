@@ -44,11 +44,15 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
+        <!--alibaba-sentinel-->
         <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
+        </dependency>-->
         <!--undertow容器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -103,6 +107,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <!--https://github.com/redisson/redisson/tree/master/redisson-spring-boot-starter 注意版本对应关系-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.13.6</version>
         </dependency>
 
         <!--测试依赖-->

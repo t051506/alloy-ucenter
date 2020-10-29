@@ -17,6 +17,11 @@ spring:
       username: nacos
       password: nacos
 
+    # https://github.com/alibaba/Sentinel/releases/tag/v1.8.0
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
