@@ -17,11 +17,16 @@ spring:
       username: nacos
       password: nacos
 
-    # https://github.com/alibaba/Sentinel/releases/tag/v1.8.0
+    # https://github.com/alibaba/Sentinel/releases/tag/1.7.1
     sentinel:
       transport:
         dashboard: 127.0.0.1:8080
-
+#      datasource:
+#        nacos:
+#          serverAddr: ${spring.cloud.nacos.discovery.server-addr}
+#          groupId: ${spring.cloud.nacos.discovery.group}
+#          dataId: ${spring.application.name}-sentinel-dev
+#          ruleType: flow
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -89,6 +94,6 @@ swagger:
         description: server all
     token-url-list:
       - http://${GATEWAY_HOST:alloy-gateway}:${GATEWAY-PORT:9999}/auth/oauth/token
-
-
-
+feign:
+  sentinel:
+    enabled: true
