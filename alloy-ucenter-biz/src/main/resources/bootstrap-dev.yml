@@ -18,6 +18,7 @@ spring:
       password: nacos
 
     # https://github.com/alibaba/Sentinel/releases/tag/1.7.1
+    # sentinel服务端需要做成服务放到注册中心，否则actuator/health 会监控不到，就会把sentinel标记为DOWN状态
     sentinel:
       transport:
         dashboard: 127.0.0.1:8080
@@ -35,6 +36,7 @@ spring:
     url: jdbc:mysql://120.79.94.56:3306/alloy?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     hikari:
       max-lifetime: 180000
+      maximum-pool-size: 20
 
   redis:
     host: 120.79.94.56
@@ -97,3 +99,12 @@ swagger:
 feign:
   sentinel:
     enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

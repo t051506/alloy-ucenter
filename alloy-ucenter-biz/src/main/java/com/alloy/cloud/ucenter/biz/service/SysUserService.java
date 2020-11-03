@@ -46,6 +46,7 @@ public class SysUserService{
         sysUserMapper.insert(sysUser);
     }
 
+    @Transactional(readOnly = true)
     public SysUser queryByUserName(String username){
         return sysUserMapper.queryByUserName(username);
     }
