@@ -2,7 +2,7 @@ package com.alloy.cloud.ucenter.biz.controller.api.v1;
 
 
 import com.alloy.cloud.common.core.base.R;
-import com.alloy.cloud.ucenter.biz.dto.sysuser.SysUserDTO;
+import com.alloy.cloud.ucenter.biz.dto.SysUserDTO;
 import com.alloy.cloud.ucenter.biz.entity.SysUser;
 import com.alloy.cloud.ucenter.biz.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -27,7 +27,7 @@ public class SysUserController {
 
     @PostMapping
     @ApiOperation("新增")
-    public R create(@Validated(SysUserDTO.AddValidGroup.class) @RequestBody SysUserDTO dto){
+    public R create(@Validated @RequestBody SysUserDTO dto){
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(dto,sysUser);
         sysUserService.insert(sysUser);

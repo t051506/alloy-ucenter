@@ -22,27 +22,11 @@
             <groupId>com.alloy.cloud</groupId>
             <artifactId>alloy-common-security</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alloy.cloud</groupId>
-                    <artifactId>alloy-ucenter-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.alloy.cloud</groupId>
-                    <artifactId>alloy-common-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.alloy.cloud</groupId>
             <artifactId>alloy-common-sentinel</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alloy.cloud</groupId>
-                    <artifactId>alloy-common-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!--注册中心客户端-->
         <dependency>
@@ -91,18 +75,15 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.version}</version>
         </dependency>
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.fox.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.fox.version}</version>
         </dependency>
         <!--logstash-->
         <dependency>
@@ -119,7 +100,6 @@
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
-            <version>${spring-redisson.version}</version>
         </dependency>
 
         <!--测试依赖-->
@@ -127,6 +107,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

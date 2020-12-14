@@ -37,7 +37,7 @@ public class SysUserService{
     @Transactional(rollbackFor = Exception.class)
     public void insert(SysUser sysUser) {
         sysUser.setUserId(idGenService.genId());
-        sysUser.setCreateTime(LocalDateTime.now());
+        sysUser.setCreateTime(null != sysUser.getCreateTime() ? sysUser.getCreateTime() :  LocalDateTime.now());
         sysUser.setIsDelete(CommonConstants.STATUS_NORMAL);
         sysUser.setPassword(ENCODER.encode(StringUtils.isEmpty(sysUser.getPassword()) ? "123456" : sysUser.getPassword()));
         sysUser.setCreateBy(SecurityUtils.getUser().getUsername());

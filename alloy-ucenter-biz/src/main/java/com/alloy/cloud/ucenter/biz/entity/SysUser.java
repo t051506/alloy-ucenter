@@ -1,26 +1,79 @@
 package com.alloy.cloud.ucenter.biz.entity;
 
 import com.alloy.cloud.common.core.base.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.time.LocalDate;
 /**
- * 用户表
+ * 用户
+ *
  * @author tankechao
- * @since 2020-10-07 13:26:07
+ * @since 2020-12-12
  */
-@Getter
-@Setter
-public class SysUser extends BaseEntity {
-    private static final long serialVersionUID = 363154537929627918L;
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class SysUser extends BaseEntity{
+    private static final long serialVersionUID = -76423951816146867L;
 
-    private Long userId;//主键ID
-    private String username;//用户名
+    /**
+     * 主键ID
+     */
+    private Long userId;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
     private String password;
-    private String salt;//随机盐
-    private String phone;//简介
-    private String headImg;//头像
-    private Integer orgCode;//组织编码
-    private Integer isLock;//0-正常，9-锁定
 
+    /**
+     * 姓名
+     */
+    private String personName;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 头像
+     */
+    private String headImg;
+
+    /**
+     * 部门ID
+     */
+    private Integer orgCode;
+
+    /**
+     * 身份证
+     */
+    private String idCard;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 出生日期
+     */
+    private LocalDate birthday;
+
+    /**
+     * 性别(0:男,1:女)
+     */
+    private Integer gender;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
+
+    /**
+     * 0-正常，9-锁定
+     */
+    private Integer isLock;
 }

@@ -4,26 +4,58 @@
 <mapper namespace="com.alloy.cloud.ucenter.biz.mapper.SysUserMapper">
 
     <sql id="BaseColumnSql">
-		user_id,username,password,salt,phone,head_img,org_code,is_lock,is_delete,create_by,create_time,update_by,update_time
+		user_id,username,password,person_name,phone,head_img,org_code,id_card,email,birthday,gender,age,is_lock,obj_version,create_by,create_time,update_by,update_time,is_delete
 	</sql>
 
     <sql id="BaseValuesSql">
-		#{userId},#{username},#{password},#{salt},#{phone},#{headImg},#{orgCode},#{isLock},#{isDelete},#{createBy},#{createTime},#{updateBy},#{updateTime}
+		#{userId},#{username},#{password},#{personName},#{phone},#{headImg},#{orgCode},#{idCard},#{email},#{birthday},#{gender},#{age},#{isLock},#{objVersion},#{createBy},#{createTime},#{updateBy},#{updateTime},#{isDelete}
 	</sql>
 
     <insert id="insert" parameterType="com.alloy.cloud.ucenter.biz.entity.SysUser">
         insert into sys_user (
         <include refid="BaseColumnSql"/>
-        )values(
+        )
+        values(
         <include refid="BaseValuesSql"/>
         )
     </insert>
 
-    <select id="selectByPrimaryKey" parameterType="string" resultType="com.alloy.cloud.ucenter.biz.entity.SysUser">
+    <update id="update" parameterType="com.alloy.cloud.ucenter.biz.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="personName != null">person_name = #{personName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="headImg != null">head_img = #{headImg},</if>
+            <if test="orgCode != null">org_code = #{orgCode},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="isLock != null">is_lock = #{isLock},</if>
+            <if test="lastUpdateTime != null">last_update_time = #{lastUpdateTime},</if>
+            <if test="lastUpdateBy != null">last_update_by = #{lastUpdateBy},</if>
+        </set>
+        where user_id = #{id}
+    </update>
+
+    <delete id="deleteById">
+		delete from sys_user where user_id = #{id}
+	</delete>
+
+    <select id="queryById" resultType="com.alloy.cloud.ucenter.biz.entity.SysUser">
         select
         <include refid="BaseColumnSql"/>
         from sys_user
-        where user_id = #{userId}
+        where user_id = #{id}
+    </select>
+
+    <select id="queryAll" resultType="com.alloy.cloud.ucenter.biz.entity.SysUser">
+        select
+        <include refid="BaseColumnSql"/>
+        from sys_user
     </select>
 
     <select id="queryByUserName" resultType="com.alloy.cloud.ucenter.biz.entity.SysUser" >
