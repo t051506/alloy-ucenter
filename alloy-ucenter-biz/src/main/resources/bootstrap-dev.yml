@@ -17,8 +17,7 @@ spring:
       username: nacos
       password: nacos
 
-    # https://github.com/alibaba/Sentinel/releases/tag/1.7.1
-    # sentinel服务端需要做成服务放到注册中心，否则actuator/health 会监控不到，就会把sentinel标记为DOWN状态
+
     sentinel:
       transport:
         dashboard: 127.0.0.1:8080
@@ -46,10 +45,10 @@ spring:
     elasticsearch:
       client:
         reactive:
-          endpoints: 192.168.173.20:9200 #集群逗号隔开
+          endpoints: 172.30.3.117:9200 #集群逗号隔开
   elasticsearch:
     rest:
-      uris: 192.168.173.20:9200 #集群逗号隔开
+      uris: 172.30.3.117:9200 #集群逗号隔开
 
 mybatis:
   typeAliasesPackage: com.alloy.cloud.**.entity
@@ -109,5 +108,5 @@ management:
     health:
       show-details: always
 logging:
-  level:
-    com.alloy.cloud: debug
+  config: classpath:logback-spring-logstash.xml
+
