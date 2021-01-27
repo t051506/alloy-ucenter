@@ -39,11 +39,10 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!--springboot admin-->
-        <!--<dependency>
+        <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>-->
+        </dependency>
         <!--undertow容器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
