@@ -132,31 +132,32 @@ public class EsOpenapiController {
      * @return
      */
     @PostMapping("/page1")
-    public R<List<EsLibrary>> page1(Long id,Integer price,String name,Integer size) throws Exception{
+    public R<List<EsLibrary>> page1(Long bookId,Integer price,String name,String type,Integer size) throws Exception{
 
         //组合查询条件
         BoolQueryBuilder bqb = QueryBuilders.boolQuery();
-        if(StringUtils.isNotEmpty(name)){
-            bqb.must(QueryBuilders.matchPhraseQuery("name", name));
-        }
-        if(ObjectUtil.isNotNull(price)){
-            bqb.must(QueryBuilders.rangeQuery("price").gt(price));
+//        if(StringUtils.isNotEmpty(name)){
+//            bqb.must(QueryBuilders.matchPhraseQuery("name", name));
+//        }
+//        if(ObjectUtil.isNotNull(price)){
+//            bqb.must(QueryBuilders.rangeQuery("price").gt(price));
+//        }
+        if(StringUtils.isNotEmpty(type)){
+            bqb.filter(QueryBuilders.termQuery("type.keyword",type));
         }
         //排序
         FieldSortBuilder priceSort = SortBuilders.fieldSort("price").order(SortOrder.ASC);
-        FieldSortBuilder idSort = SortBuilders.fieldSort("_id").order(SortOrder.DESC);
+        FieldSortBuilder idSort = SortBuilders.fieldSort("bookId").order(SortOrder.DESC);
 
         SearchSourceBuilder builder = new SearchSourceBuilder();
         builder.query(bqb);
         builder.sort(priceSort);
         builder.sort(idSort);
         builder.size(size);
-        if(ObjectUtil.isNotNull(id) && ObjectUtil.isNotNull(price)){
-            builder.searchAfter(new String[]{id.toString(),price.toString()});
-        }else{
-            builder.from(0);
+        builder.from(0);
+        if(ObjectUtil.isNotNull(bookId) && ObjectUtil.isNotNull(price)){
+            builder.searchAfter(new Object[]{price,bookId});
         }
-
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices("library");
         searchRequest.source(builder);
@@ -179,6 +180,7 @@ public class EsOpenapiController {
             esLibrary.setName(MapUtil.getStr(next,"name"));
             esLibrary.setType(MapUtil.getStr(next,"type"));
             esLibrary.setInfo(MapUtil.getStr(next,"info"));
+            esLibrary.setBookId(MapUtil.getLong(next,"bookId"));
             results.add(esLibrary);
         }
         return R.ok(results);

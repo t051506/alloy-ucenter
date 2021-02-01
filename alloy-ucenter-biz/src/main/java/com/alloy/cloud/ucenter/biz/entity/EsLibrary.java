@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 public class EsLibrary {
 
     @Id
-    private String id;
+    private Long bookId;
     @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
     private String name;
     @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
