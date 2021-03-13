@@ -15,7 +15,9 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -30,6 +32,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -185,4 +188,31 @@ public class EsOpenapiController {
         }
         return R.ok(results);
     }
+
+
+    @PostMapping("/aggs")
+    public void queryAggs(String type,Integer price)throws IOException {
+        BoolQueryBuilder bqb = QueryBuilders.boolQuery();
+        if(StringUtils.isNotEmpty(type)){
+            bqb.filter(QueryBuilders.termQuery("type.keyword",type));
+        }
+        if(null != price){
+            bqb.filter(QueryBuilders.rangeQuery("price").gt(price));
+        }
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(bqb);
+        builder.aggregation(AggregationBuilders.terms("type").field("type.keyword"));
+        builder.aggregation(AggregationBuilders.avg("total_price").field("price"));
+
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices("library");
+        searchRequest.source(builder);
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        Aggregations aggregations = searchResponse.getAggregations();
+        Iterator<Aggregation> iterator = aggregations.iterator();
+        while (iterator.hasNext()){
+            iterator.next();
+        }
+    }
+
 }
